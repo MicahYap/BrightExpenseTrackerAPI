@@ -4,17 +4,17 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      redirect_to user_expenses_path
+      render json: { message: 'User created successfully', user: @user }, status: :created
     else 
       render json: @user.errors, status: :unprocessable_entity
     end
   end
 
   def login
-    @user = User.find_by(email: params[:email])
+    @user = User.find_by(email: params[:user][:email])
     if @user
       session[:user_id] = @user.id
-      redirect_to user_expenses_path
+      render json: { message: 'Login successful', user: @user }, status: :ok
     else
       render json: {error: 'Invalid Email'}, status: :unprocessable_entity
     end
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
 
   def logout
     session[:user.id] = nil
-    redirect_to root_path
+    render json: { message: 'Logout successful' }, status: :ok
   end
 
 
