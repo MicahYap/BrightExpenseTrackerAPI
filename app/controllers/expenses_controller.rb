@@ -33,7 +33,7 @@ class ExpensesController < ApplicationController
   end
 
   def create
-    @expense = @current_user.expenses.build(expense_params)\
+    @expense = @current_user.expenses.build(expense_params)
     if @expense.save
       render json: @expense, status: :created
     else
