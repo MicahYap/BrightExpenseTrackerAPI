@@ -21,7 +21,7 @@ class UsersController < ApplicationController
   end
 
   def logout
-    session[:user.id] = nil
+    session[:user_id] = nil
     render json: { message: 'Logout successful' }, status: :ok
   end
 
