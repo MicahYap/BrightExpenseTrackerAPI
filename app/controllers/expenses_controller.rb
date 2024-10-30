@@ -8,6 +8,7 @@ class ExpensesController < ApplicationController
     start_date = Date.new(year, month, 1)
     end_date = start_date.end_of_month
     @expenses = @current_user.expenses.where(date: start_date..end_date)
+      .order(date: :desc)
       .page(params[:page])
       .per(params[:per_page] || 10)
 
